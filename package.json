@@ -1,0 +1,31 @@
+{
+  "name": "pwa-control-plane",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "bootstrap": "tsx scripts/bootstrap.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/rate-limit": "^10.1.0",
+    "@fastify/swagger": "^8.15.0",
+    "@fastify/swagger-ui": "^2.1.0",
+    "@octokit/rest": "^21.0.0",
+    "@prisma/client": "^5.19.1",
+    "fastify": "^4.28.1",
+    "ioredis": "^5.4.1",
+    "nanoid": "^5.0.7",
+    "tweetsodium": "^0.0.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "prisma": "^5.19.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}

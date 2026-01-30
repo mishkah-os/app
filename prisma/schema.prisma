@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum DevRole {
+  ADMIN
+  DEV
+}
+
+enum SecretType {
+  GITHUB_PAT
+  APPLE_ASC_KEY_ID
+  APPLE_ASC_ISSUER_ID
+  APPLE_ASC_P8_B64
+  ANDROID_UPLOAD_JKS_B64
+  ANDROID_UPLOAD_JKS_PASS
+  ANDROID_UPLOAD_KEY_ALIAS
+  ANDROID_UPLOAD_KEY_PASS
+  GOOGLE_PLAY_SA_B64
+}
+
+model Developer {
+  id          String   @id
+  name        String
+  role        DevRole
+  apiKeyHash  String   @unique
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  projects    Project[]
+  logs        AccessLog[]
+}
+
+model Project {
+  id              String   @id
+  ownerDevId      String
+  owner           Developer @relation(fields: [ownerDevId], references: [id])
+  name            String
+  domain          String
+  iosBundleId     String?
+  iosScheme       String?
+  androidPackage  String?
+  githubOwner     String?
+  githubRepo      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  secrets         Secret[]
+  builds          Build[]
+}
+
+model Secret {
+  id         String     @id
+  projectId  String
+  project    Project    @relation(fields: [projectId], references: [id])
+  type       SecretType
+  enc        String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([projectId, type])
+}
+
+model Build {
+  id          String   @id
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id])
+  platform    String
+  workflow    String
+  ref         String
+  runId       Int?
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AccessLog {
+  id        String   @id
+  devId     String
+  dev       Developer @relation(fields: [devId], references: [id])
+  ip        String
+  action    String
+  meta      String?
+  createdAt DateTime @default(now())
+}
