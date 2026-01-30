@@ -1,4 +1,4 @@
-تمام يا حسين. هديك **مشروع Node حقيقي** (TypeScript + Fastify + Postgres + Redis) مبني كـ “Control Plane” تدير منه كل مراحل **PWA → Android TWA / iOS WKWebView** عبر GitHub Actions.
+**مشروع Node حقيقي** (TypeScript + Fastify + Postgres + Redis) مبني كـ “Control Plane” تدير منه كل مراحل **PWA → Android TWA / iOS WKWebView** عبر GitHub Actions.
 
 المشروع فيه:
 
