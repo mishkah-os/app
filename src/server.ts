@@ -13,6 +13,8 @@ import { devKeyRoutes } from "./routes/devkeys.js";
 import { projectRoutes } from "./routes/projects.js";
 import { credentialRoutes } from "./routes/credentials.js";
 import { githubRoutes } from "./routes/github.js";
+import { publicRoutes } from "./routes/public.js";
+import { guideRoutes } from "./routes/guides.js";
 
 const prisma = new PrismaClient();
 const redis = new Redis(env.REDIS_URL);
@@ -30,6 +32,8 @@ await app.register(swaggerUI, { routePrefix: "/docs" });
 
 await app.register(ratePlugin, { redis });
 
+await app.register(publicRoutes, { prisma });
+
 await app.register(authPlugin, { prisma, redis });
 
 await app.register(healthRoutes);
@@ -37,6 +41,7 @@ await app.register(devKeyRoutes, { prisma });
 await app.register(projectRoutes, { prisma });
 await app.register(credentialRoutes, { prisma });
 await app.register(githubRoutes, { prisma });
+await app.register(guideRoutes, { prisma });
 
 app.setErrorHandler(async (err, req, reply) => {
   if (err instanceof HttpError) {

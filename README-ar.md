@@ -142,6 +142,8 @@ http://localhost:8080/docs
 
 - توثيق إنجليزي: `docs/README.md`
 - توثيق عربي: `docs/README-ar.md`
+- دليل النشر (EN/AR): `docs/guides/publishing-guide-en.md`, `docs/guides/publishing-guide-ar.md`
+- قوالب الخصوصية: `docs/templates/privacy-policy-en.md`, `docs/templates/privacy-policy-ar.md`
 
 ---
 

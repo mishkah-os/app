@@ -141,6 +141,8 @@ http://localhost:8080/docs
 
 - English docs: `docs/README.md`
 - Arabic docs: `docs/README-ar.md`
+- Beginner guide (EN/AR): `docs/guides/publishing-guide-en.md`, `docs/guides/publishing-guide-ar.md`
+- Privacy policy templates: `docs/templates/privacy-policy-en.md`, `docs/templates/privacy-policy-ar.md`
 
 ---
 

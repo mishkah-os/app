@@ -50,6 +50,31 @@ x-api-key: YOUR_API_KEY
 
 ---
 
+## Publishing Guide & Privacy Policy
+
+Beginner-friendly guides are stored as Markdown files and can be retrieved by API.
+
+### Guide files
+- `docs/guides/publishing-guide-en.md`
+- `docs/guides/publishing-guide-ar.md`
+
+### Privacy policy templates
+- `docs/templates/privacy-policy-en.md`
+- `docs/templates/privacy-policy-ar.md`
+
+### Public privacy policy (HTML)
+
+Public HTML can be shared with store reviewers:
+
+```
+/public/projects/:id/privacy
+/public/projects/slug/:slug/privacy
+```
+
+To use a slug, set `publicSlug` on the project (3–32 chars, unique, lowercase letters, numbers, hyphen).
+
+---
+
 ## Endpoints
 
 ### Health
@@ -110,7 +135,8 @@ Create a project (PWA app).
   "domain": "https://pwa.example.com",
   "iosBundleId": "com.example.pwa",
   "iosScheme": "EXAMPLEPWA",
-  "androidPackage": "com.example.pwa"
+  "androidPackage": "com.example.pwa",
+  "publicSlug": "my-app"
 }
 ```
 
@@ -138,7 +164,8 @@ Update project metadata. Useful for GitHub repo binding.
 ```json
 {
   "githubOwner": "ORG_OR_USER",
-  "githubRepo": "REPO_NAME"
+  "githubRepo": "REPO_NAME",
+  "publicSlug": "my-app"
 }
 ```
 
@@ -230,6 +257,50 @@ Optional query:
 
 #### `GET /v1/projects/:id/github/runs/:runId`
 Get details for a specific workflow run.
+
+---
+
+### Guides & Policies
+
+#### `GET /v1/projects/:id/guides/publishing`
+Get the beginner-friendly publishing guide in Markdown.
+
+Query:
+```
+?lang=en|ar
+```
+
+---
+
+#### `GET /v1/projects/:id/privacy-policy`
+Get a privacy policy template in Markdown (project-specific placeholders filled).
+
+Query:
+```
+?lang=en|ar
+```
+
+---
+
+### Public Privacy Policy (HTML)
+
+#### `GET /public/projects/:id/privacy`
+Public HTML page for store review.
+
+Optional query:
+```
+?lang=en|ar
+```
+
+---
+
+#### `GET /public/projects/slug/:slug/privacy`
+Public HTML page using a unique slug.
+
+Optional query:
+```
+?lang=en|ar
+```
 
 ---
 

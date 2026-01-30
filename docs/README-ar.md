@@ -50,6 +50,30 @@ x-api-key: YOUR_API_KEY
 
 ---
 
+## دليل النشر وسياسة الخصوصية
+
+تم تجهيز دليل مفصل للمبتدئين ويتم توفيره كملفات Markdown.
+
+### ملفات الدليل
+- `docs/guides/publishing-guide-en.md`
+- `docs/guides/publishing-guide-ar.md`
+
+### قوالب سياسة الخصوصية
+- `docs/templates/privacy-policy-en.md`
+- `docs/templates/privacy-policy-ar.md`
+
+### صفحة خصوصية عامة (HTML)
+
+يمكن مشاركة الرابط مع فريق مراجعة المتاجر:
+
+```
+/public/projects/:id/privacy
+/public/projects/slug/:slug/privacy
+```
+
+لاستخدام اسم عام، ضع `publicSlug` في المشروع (3–32 حرفاً، فريد، حروف صغيرة وأرقام وشرطة).
+---
+
 ## الـ Endpoints
 
 ### الصحة
@@ -105,7 +129,8 @@ x-api-key: ADMIN_KEY
   "domain": "https://pwa.example.com",
   "iosBundleId": "com.example.pwa",
   "iosScheme": "EXAMPLEPWA",
-  "androidPackage": "com.example.pwa"
+  "androidPackage": "com.example.pwa",
+  "publicSlug": "my-app"
 }
 ```
 
@@ -128,7 +153,8 @@ x-api-key: ADMIN_KEY
 ```json
 {
   "githubOwner": "ORG_OR_USER",
-  "githubRepo": "REPO_NAME"
+  "githubRepo": "REPO_NAME",
+  "publicSlug": "my-app"
 }
 ```
 
@@ -220,6 +246,50 @@ x-api-key: ADMIN_KEY
 
 #### `GET /v1/projects/:id/github/runs/:runId`
 جلب تفاصيل تشغيل محدد.
+
+---
+
+### الأدلة والسياسات
+
+#### `GET /v1/projects/:id/guides/publishing`
+جلب دليل النشر المفصل بصيغة Markdown.
+
+استعلام:
+```
+?lang=en|ar
+```
+
+---
+
+#### `GET /v1/projects/:id/privacy-policy`
+جلب سياسة الخصوصية بصيغة Markdown مع تعبئة بيانات المشروع.
+
+استعلام:
+```
+?lang=en|ar
+```
+
+---
+
+### سياسة الخصوصية العامة (HTML)
+
+#### `GET /public/projects/:id/privacy`
+صفحة HTML عامة لإرسالها لمراجعة المتاجر.
+
+استعلام اختياري:
+```
+?lang=en|ar
+```
+
+---
+
+#### `GET /public/projects/slug/:slug/privacy`
+صفحة HTML عامة باستخدام الاسم العام الفريد.
+
+استعلام اختياري:
+```
+?lang=en|ar
+```
 
 ---
 
